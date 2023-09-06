@@ -1,0 +1,41 @@
+# Byte-compiled / optimized Python files
+*.pyc
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+*.env
+
+# Django generated files
+*.log
+db.sqlite3
+
+# Media files
+media/
+
+# Static files (only if using collectstatic)
+staticfiles/
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Development tools
+.vscode/
+.idea/
+*.pydevproject
+*.pydevprojectc
+
+# Editor-specific files
+*~
+*.swp
+*.swo
+
+# Ignore sensitive or environment-specific information
+.env
+
+# Ignore compiled translations
+locale/
+
+courses_videos/
