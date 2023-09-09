@@ -1,0 +1,141 @@
+{% load tailwind_tags %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription</title>
+  <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css" />
+  {% tailwind_preload_css %} {% tailwind_css %}
+</head>
+
+<body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600 opacity-95">
+  <div class="p-10 lg:p-52  m-10 shadow-2xl bg-white">
+    <div class="w-full  flex-auto">
+      <p class="text-3xl">Inscrivez vous</p>
+
+      <form action="" method="post" class="mt-14 w-full">
+        {% csrf_token %}
+
+        <div class="flex flex-col lg:flex-row">
+          <div class="flex-auto">
+            <div class="flex items-center p-4 bg-gray-200 rounded-md hover:shadow-md mt-4">
+              <i class="fas fa-user fa-2x text-gray-500 mr-4"></i>
+              <div>
+                <h3 class="text-gray-500">Nom de famille</h3>
+                <input type="name" name="name" id="name"
+                  class="w-full border-transparent focus:border-transparent focus:ring-0 p-0 bg-transparent"
+                  placeholder="Example: Landry Simo" />
+              </div>
+              <div class="ml-auto"></div>
+            </div>
+
+            <div class="flex items-center p-4 bg-gray-200 rounded-md hover:shadow-md mt-4">
+              <i class="fas fa-envelope fa-2x text-gray-500 mr-4"></i>
+
+              <div>
+                <h3 class="text-gray-500">Adresse Email</h3>
+                <input type="email" name="email" id="email"
+                  class="w-full border-transparent focus:border-transparent focus:ring-0 p-0 bg-transparent"
+                  placeholder="Example: QgPjv@example.com" required />
+              </div>
+              <div class="ml-auto"></div>
+            </div>
+
+            {% if email_unique_error %}
+            <span class="text-red-500">{{ email_unique_error }}</span>
+            {% endif %}
+
+            <div class="flex items-center p-4 bg-gray-200 rounded-md hover:shadow-md mt-4">
+              <i class="fas fa-lock fa-2x text-gray-500 mr-4"></i>
+
+              <div>
+                <h3 class="text-gray-500">Creer un mot de passe</h3>
+                <input type="password" name="password" id="password"
+                  class="w-full border-transparent focus:border-transparent focus:ring-0 p-0 bg-transparent"
+                  placeholder="Example: ......." required />
+              </div>
+              <div class="ml-auto"></div>
+            </div>
+            <div class="flex items-center p-4 bg-gray-200 rounded-md hover:shadow-md mt-4">
+              <i class="fas fa-lock fa-2x text-gray-500 mr-4"></i>
+
+              <div>
+                <h3 class="text-gray-500">Confirmation</h3>
+                <input type="password" name="password" id="password"
+                  class="w-full border-transparent focus:border-transparent focus:ring-0 p-0 bg-transparent"
+                  placeholder="Example: ......." required />
+              </div>
+              <div class="ml-auto"></div>
+            </div>
+          </div>
+          <div class="w-0 lg:w-28"></div>
+          <div class="flex-auto">
+            <div class="flex items-center p-4 bg-gray-200 rounded-md hover:shadow-md mt-4">
+              <i class="fas fa-phone fa-2x text-gray-500 mr-4"></i>
+              <div>
+                <h3 class="text-gray-500">Numero de telephone</h3>
+                <input type="phone" name="phone" id="phone"
+                  class="w-full border-transparent focus:border-transparent focus:ring-0 p-0 bg-transparent"
+                  placeholder="Example: +237655998877" />
+              </div>
+              <div class="ml-auto"></div>
+            </div>
+
+            <div class="flex items-center p-4 bg-gray-200 rounded-md hover:shadow-md mt-4">
+              <i class="fas fa-globe fa-2x text-gray-500 mr-4"></i>
+
+              <div>
+                <h3 class="text-gray-500">Pays</h3>
+                <input type="country" name="country" id="country"
+                  class="w-full border-transparent focus:border-transparent focus:ring-0 p-0 bg-transparent"
+                  placeholder="Example: Cameroun" required />
+              </div>
+              <div class="ml-auto"></div>
+            </div>
+            <div class="flex items-center p-4 bg-gray-200 rounded-md hover:shadow-md mt-4">
+              <i class="fas fa-city fa-2x text-gray-500 mr-4"></i>
+
+              <div>
+                <h3 class="text-gray-500">Ville</h3>
+                <input type="city" name="city" id="city"
+                  class="w-full border-transparent focus:border-transparent focus:ring-0 p-0 bg-transparent"
+                  placeholder="Example: Douala" required />
+              </div>
+              <div class="ml-auto"></div>
+            </div>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="flex flex-row pt-8">
+          <button type="submit"
+            class="w-1/2 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold py-2 px-4 rounded-xl"
+            value="">
+            Creer mon compte
+          </button>
+          <div class="w-5"></div>
+          <a href=" {% url 'login' %} " class="w-1/2 h-12 py-3 px-4 rounded-xl bg-gray-200 text-center content-center">
+            connexion</a>
+        </div>
+        <div class="flex flex-row pt-3 items-center justify-center">
+          <hr class="w-32" />
+          <span class="p-2 text-gray-500">Ou Cree ton compte avec</span>
+          <hr class="w-32" />
+        </div>
+        <div class="flex flex-row justify-between pt-3 lg:px-60">
+          <img src="https://logo.clearbit.com/google.com" class="rounded-full w-16 h-16" />
+          <img src="https://logo.clearbit.com/facebook.com" class="rounded-full w-16 h-16" />
+          <img src="https://logo.clearbit.com/github.com" class="rounded-full w-16 h-16" />
+          <img src="https://logo.clearbit.com/twitter.com" class="rounded-full w-16 h-16" />
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

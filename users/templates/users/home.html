@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil - Starland Learn{% endblock %}
+
+{% block content %}
+<div class=" flex flex-col">
+  <h1 class=" text-6xl  font-bold text-purple-700 mt-10">Bienvenue sur notre site de e-learning !</h1>
+  <p class=" text-4xl text-gray-500 mt-5">Commencez dès maintenant votre parcours d'apprentissage.</p>
+  <a href="{% url 'login' %}"
+    class=" text-white bg-gradient-to-tr from-indigo-700 to-purple-200 p-3 mt-8 w-60 rounded-xl text-center text-xl font-bold">Commencer</a>
+
+</div>
+
+{% endblock %}

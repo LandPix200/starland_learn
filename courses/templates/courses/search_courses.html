@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+{{ searched }}
+
+{% endblock title %}
+
+
+{% block content %}
+
+
+{% if courses|length == 0 %}
+<div class="flex flex-col text-center items-center justify-center ">
+    <p class=" flex-1 mt-52 text-white text-3xl">Aucun cours trouvé avec le terme "{{ searched }}"</p>
+</div>
+
+
+
+{% else %}
+
+<div class=" grid grid-cols-1 lg:grid-cols-3">
+
+
+    {% for course in courses %}
+
+    {% include 'courses/course_card.html' with course=course %}
+
+    {% endfor %}
+
+
+</div>
+
+{% endif %}
+
+
+
+
+{% endblock content %}

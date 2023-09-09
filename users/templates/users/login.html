@@ -1,19 +1,125 @@
 {% load tailwind_tags %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/global.css' %}" >
-    <title>Document</title>
-    {% tailwind_preload_css %}
-    {% tailwind_css %}
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion</title>
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    {% tailwind_preload_css %} {% tailwind_css %}
 </head>
-<body>
 
- Salut a tous
-    
+<body class=" bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600 opacity-95    ">
+    <div class="p-10 m-10 shadow-2xl bg-white">
+        <div class="flex flex-col lg:flex-row">
+            <img src="https://img.freepik.com/vecteurs-libre/illustration-certification-ligne_23-2148575636.jpg?w=826&t=st=1694085565~exp=1694086165~hmac=54c6f52876bbcc714e49164498dd489448d6993ca7ab2760af8b5a3a38d97b1b"
+                alt="" class="flex-1" />
+
+            <div class="w-32"></div>
+
+            <div class="w-full pt-10 flex-auto">
+                <p class="text-3xl">Bienvenue sur notre plateforme de cours en ligne !
+
+                </p>
+                <br />
+                <p class="text-gray-600">
+                    Ici, vous trouverez une multitude de cours passionnants pour développer vos compétences et enrichir
+                    vos connaissances. Que vous soyez débutant ou expert, notre plateforme est conçue pour vous
+                    accompagner tout au long de votre parcours d'apprentissage.
+                </p>
+
+
+                <form action="" method="post" class="mt-14 w-full lg:w-3/5">
+                    {% csrf_token %}
+
+                    <div class="flex items-center p-4 bg-gray-200 rounded-md hover:shadow-md ">
+                        <div class="mr-4">
+                            <i class="fas fa-envelope fa-3x text-gray-500"></i>
+                        </div>
+                        <div>
+                            <h3 class=" text-gray-500">Adresse Email</h3>
+                            <input type="email" name="email" id="email"
+                                class="w-full border-transparent focus:border-transparent focus:ring-0 p-0 bg-transparent"
+                                placeholder="Example: QgPjv@example.com" required />
+                        </div>
+                        <div class="ml-auto">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="flex items-center p-4 bg-gray-200 rounded-md hover:shadow-md ">
+                        <div class="mr-4">
+                            <i class="fas fa-lock fa-3x text-gray-500"></i>
+                        </div>
+                        <div>
+                            <h3 class=" text-gray-500">Mot de passe</h3>
+                            <input type="password" name="password" id="password"
+                                class="w-full border-transparent focus:border-transparent focus:ring-0 p-0 bg-transparent"
+                                placeholder="Example: ......." required />
+                        </div>
+                        <div class="ml-auto">
+                        </div>
+                    </div>
+
+                    {% if error %}
+                    <br>
+                    <span class=" text-red-400 py-5"> {{ error }}</span>
+                    <br>
+                    {% endif %}
+
+                    <br>
+                    <div class="flex flex-row align-middle justify-between">
+                        <div>
+                            <input type="checkbox" name="remember" id="remember">
+                            <label for="remember" class="ml-2 text-gray-500 ">Rester connecte</label>
+                        </div>
+                        <a href="#" class="text-gray-500">Mot de passe oublie ?</a>
+
+                    </div>
+
+
+
+                    <div class="flex flex-row pt-8 justify-center">
+                        <button type="submit"
+                            class="w-1/2 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold py-2 px-4 rounded-xl"
+                            value="">Se connecter</button>
+                        <div class=" w-5"></div>
+                        <a href=" {% url 'register' %} "
+                            class="w-1/2 h-12 py-3 px-4 rounded-xl bg-gray-200 text-center content-center">
+                            Creer un
+                            compte</a>
+                    </div>
+                    <div class=" flex flex-row pt-3 items-center justify-center">
+                        <hr class="w-32"> <span class=" p-2 text-gray-500">Ou connecte toi avec</span>
+                        <hr class=" w-32">
+                    </div>
+                    <div class="flex flex-row justify-between pt-3">
+                        <img src="https://logo.clearbit.com/google.com" class=" rounded-full w-16 h-16">
+                        <img src="https://logo.clearbit.com/facebook.com" class=" rounded-full w-16 h-16">
+                        <img src="https://logo.clearbit.com/github.com" class=" rounded-full w-16 h-16">
+                        <img src="https://logo.clearbit.com/twitter.com" class=" rounded-full w-16 h-16">
+
+                    </div>
+
+
+
+                </form>
+            </div>
+        </div>
+
+        {% if register_sucess %}
+        <div class="flex flex-row items-center bg-gray-200 p-5">
+            <span class=" text-center w-full text-green-500 text-xl">Votre compte a bien été crée.
+                connectez-vous</span>
+            <i class="fas fa-check text-green-500"></i>
+        </div>
+        {% endif %}
+
+
+    </div>
 </body>
-</html> 
+
+</html>

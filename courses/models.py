@@ -1,6 +1,16 @@
 from django.db import models
 
 from users.models import User
+from django.core.exceptions import ValidationError
+from django.template.defaultfilters import filesizeformat
+from django.utils.translation import gettext_lazy as _
+
+
+def validate_video_file_extension(value):
+    allowed_extensions = ['.mp4', '.webm']
+    if not value.name.lower().endswith(tuple(allowed_extensions)):
+        raise ValidationError(
+            _('Seuls les fichiers vidéo MP4 et WebM sont autorisés.'))
 
 
 class CourseManager(models.Manager):
@@ -36,15 +46,14 @@ class CourseManager(models.Manager):
 class Course(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    file = models.FileField(upload_to='courses_videos/')
+    file = models.FileField(upload_to='courses_videos/',
+                            validators=[validate_video_file_extension])
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     ratings = models.PositiveIntegerField(default=0)
-    comments = models.ManyToManyField(
-        User, through='CourseComment', related_name='courses_commented')
 
     def __str__(self):
         return self.title.__str__()
@@ -59,4 +68,4 @@ class CourseComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Comment by {self.user.email} on {self.course.title}"
+        return f"Comment by {self.user.email}"
