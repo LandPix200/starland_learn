@@ -3,10 +3,10 @@
 {% block content %}
 <div class="flex flex-col">
     <h1
-        class="text-6xl font-bold text-white mt-10 opacity-0 transform translate-x-0 transition-opacity duration-1000 delay-500">
+        class="text-5xl font-bold text-white mt-10 opacity-0 transform translate-x-0 transition-opacity duration-1000 delay-500">
         Bienvenue sur notre site de e-learning !
     </h1>
-    <p class="text-4xl text-gray-100 mt-5 opacity-0 transform translate-x-0 transition-opacity duration-1000 delay-800">
+    <p class="text-2xl text-gray-100 mt-5 opacity-0 transform translate-x-0 transition-opacity duration-1000 delay-800">
         Commencez dès maintenant votre parcours d'apprentissage.
     </p>
 
@@ -19,6 +19,8 @@
 
     {% else %}
 
+
+    {% if user.is_teacher %}
     <a href="{% url 'create_course' %}"
         class="h-12 text-center bg-gradient-to-r from-purple-500 to-purple-700 text-white font-bold py-3 mt-4 px-4 rounded-xl w-80 opacity-0 transform translate-x-0 transition-opacity duration-1000 delay-1100">
         Creer un cours
@@ -28,9 +30,13 @@
 
 
 
+    {% endif %}
+
+
+
 </div>
 
-<h1 class="mt-10 font-bold text-4xl text-blue-100">Nos cours du jour</h1>
+<h1 class="mt-10 font-bold text-4xl text-blue-100">Nos cours</h1>
 <hr class="mt-4" />
 
 

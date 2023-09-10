@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
+import secrets
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,19 +22,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-_)9cv7=#2^k+r#g22e^*1!u2uh)se@qe7imo5cjj_2j*u4@7kr"
+
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    default=secrets.token_urlsafe(nbytes=64),
+)
+
+IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if not IS_HEROKU_APP:
+    DEBUG = True
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "efd0-154-72-167-159.ngrok-free.app",
-]
+if IS_HEROKU_APP:
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = []
 
 INTERNAL_IPS = [
     "127.0.0.1",
     "efd0-154-72-167-159.ngrok-free.app",
+    "192.168.43.209",
 ]
 
 
@@ -52,6 +62,7 @@ INSTALLED_APPS = [
     "django_browser_reload",
     "fontawesomefree",
     "corsheaders",
+    "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
@@ -134,7 +145,8 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATIC_ROOT = BASE_DIR / "static"
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -159,3 +171,6 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
+
+
+WHITENOISE_KEEP_ONLY_HASHED_FILES = True

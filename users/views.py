@@ -65,12 +65,23 @@ def logout(request):
     return redirect("index")
 
 
-def profile(request):
+def profile(request, user_id):
     user = request.user
-    return render(request, "users/profile.html", {"user": user})
+    profile_user = User.objects.get(pk=user_id)
+    return render(
+        request, "users/profile.html", {"user": user, "profile_user": profile_user}
+    )
 
 
 def delete_account(request):
     user = request.user
     user.delete()
     return redirect("index")
+
+
+def become_teacher(request):
+    user = request.user
+    user.is_teacher = True
+    user.save()
+
+    return redirect("profile", user_id=user.id)

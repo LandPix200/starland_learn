@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
-from users.views import login, register, logout, profile, delete_account
+from users.views import login, register, logout, profile, delete_account, become_teacher
 from courses.views import (
     index,
     home,
@@ -37,9 +37,10 @@ urlpatterns = [
     path("login/", login, name="login"),
     path("register/", register, name="register"),
     path("logout/", logout, name="logout"),
-    path("profile/", profile, name="profile"),
+    path("profile/<int:user_id>/", profile, name="profile"),
     path("home/", home, name="home"),
     path("delete_account/", delete_account, name="delete_account"),
+    path("become_teacher/", become_teacher, name="become_teacher"),
     path("course/<int:course_id>/", course_page, name="course_page"),
     path(
         "course/<int:course_id>/comment", comment_controller, name="comment_controller"

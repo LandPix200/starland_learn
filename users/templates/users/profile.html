@@ -4,6 +4,7 @@
 {% block title %}
 
 Mon profile
+
 {% endblock title %}
 
 
@@ -16,24 +17,49 @@ Mon profile
         <p class="mt-2 text-gray-500">Informations personnelles</p>
         <div class="mt-4">
             <div class="flex items-center">
-                <img src="avatar.jpg" alt="Avatar" class="w-12 h-12 rounded-full">
+                <img src="https://cdn-icons-png.flaticon.com/128/5686/5686735.png" alt="Avatar"
+                    class="w-12 h-12 rounded-full">
                 <div class="ml-4">
-                    <h3 class="text-lg font-semibold text-gray-800">{{ user.last_name }}</h3>
-                    <p class="text-purple-700">Développeur</p>
+                    <h3 class="text-lg font-semibold text-gray-800">{{ profile_user.last_name }}</h3>
+
+                    {% if profile_user.is_teacher %}
+                    <p class="text-purple-700">Professeur</p>
+
+                    {% else %}
+                    <p class="text-purple-700">Etudiant</p>
+                    {% endif %}
+
+
                 </div>
             </div>
             <div class="mt-4">
-                <p class="text-gray-700">Email: <a href="mailto:{{ user.email }}" class="text-purple-700">
-                        {{ user.email}}</a></p>
+                <p class="text-gray-700">Email: <a href="mailto:{{ profile_user.email }}" class="text-purple-700">
+                        {{ profile_user.email}}</a></p>
                 <p class="text-gray-700">Téléphone:
-                    <a href="tel:{{ user.phone_number }}" class="text-purple-700">{{ user.phone_number }}</a>
+                    <a href="tel:{{ profile_user.phone_number }}" class="text-purple-700">
+                        {{ profile_user.phone_number}}</a>
                 </p>
                 <p class="text-gray-700">Adresse:
-                    <i class=" font-semibold">{{ user.city }}, {{ user.country }}</i>
+                    <i class=" font-semibold">{{ profile_user.city }}, {{ profile_user.country }}</i>
                 </p>
                 <br>
-                <a href="{% url 'delete_account' %}" class=" bg-red-500 text-white p-3 mt-10 rounded-lg">
-                    Supprimer mon compte</a>
+
+                {% if profile_user.id == user.id %}
+                <div class="flex flex-row">
+                    <a href="{% url 'delete_account' %}" class=" bg-red-500 text-white p-3 mt-10 rounded-lg">
+                        Supprimer mon compte</a>
+
+                    {% if not user.is_teacher %}
+                    <a href="{% url 'become_teacher' %}" class=" bg-green-500 text-white p-3 mt-10 rounded-lg ml-5">
+                        Devenir un enseignant</a>
+                    {% endif %}
+
+
+                </div>
+                {% endif %}
+
+
+
 
             </div>
 

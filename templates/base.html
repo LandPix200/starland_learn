@@ -26,14 +26,14 @@
 
 <body class="bg-gradient-to-bl from-indigo-900 via-purple-900 to-blue-950 flex flex-col min-h-screen">
     <div
-        class="fixed top-0 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600 py-4 px-6 text-white shadow-md scroll-hide flex flex-row justify-between items-end z-40">
+        class="fixed top-0 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600 py-4 px-6 text-white shadow-md scroll-hide flex flex-col lg:flex-row justify-between items-end z-40">
         <a href="{% url 'index' %}" class="font-bold text-3xl">Starland Learn</a>
 
         <form action="{% url 'search_courses' %}" method="post">
             {% csrf_token %}
-            <div class="flex items-center justify-center text-black">
+            <div class="flex items-center justify-center text-black mt-2 ">
                 <input type="text" placeholder="Rechercher un cours" , name="searched" , id="searched"
-                    class="px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                    class=" px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-3/4" />
                 <button type="submit"
                     class="px-4 py-2 bg-indigo-800 text-white rounded-r-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                     Rechercher
@@ -42,13 +42,19 @@
         </form>
 
         <div>
-            <ul class="flex space-x-4">
+            <ul class="flex space-x-4 mt-2">
 
 
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'profile' %}" class="hover:text-gray-300">Profile</a></li>
+                <li><a href="{% url 'profile' user.pk %}" class="hover:text-gray-300">Profile</a></li>
 
                 <li><a href="{% url 'logout' %}" class="hover:text-gray-300">Deconnexion</a></li>
+
+                {% else %}
+
+                <li><a href="{% url 'login' %}" class="hover:text-gray-300">Connexion</a></li>
+
+                <li><a href="{% url 'register' %}" class="hover:text-gray-300">Inscription</a></li>
                 {% endif %}
 
             </ul>
